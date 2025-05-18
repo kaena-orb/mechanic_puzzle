@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=3 uid="uid://drgyytt34f618"]
+
+[ext_resource type="Script" uid="uid://8c3y0plhykip" path="res://toggle.gd" id="1_64gw1"]
+
+[sub_resource type="Gradient" id="Gradient_64gw1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.104967, 0.0935321, 0.0896365, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cu05y"]
+gradient = SubResource("Gradient_64gw1")
+
+[sub_resource type="Gradient" id="Gradient_cu05y"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.454126, 0.27822, 0.132652, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w2yvn"]
+gradient = SubResource("Gradient_cu05y")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64gw1"]
+size = Vector2(21, 6)
+
+[sub_resource type="Animation" id="Animation_64gw1"]
+resource_name = "press"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3.2)]
+}
+
+[sub_resource type="Animation" id="Animation_cu05y"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w2yvn"]
+_data = {
+&"RESET": SubResource("Animation_cu05y"),
+&"press": SubResource("Animation_64gw1")
+}
+
+[node name="Toggle" type="StaticBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+script = ExtResource("1_64gw1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2.25)
+scale = Vector2(0.101562, 5.5)
+texture = SubResource("GradientTexture1D_cu05y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(0.109375, 1.5)
+texture = SubResource("GradientTexture1D_w2yvn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-15, 1, -13, -1, -8.5, -5, 8, -5, 12.5, -1.5, 15, 1)
+
+[node name="ObjectDetection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectDetection"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_64gw1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w2yvn")
+}
+autoplay = "RESET"
+
+[connection signal="area_entered" from="ObjectDetection" to="." method="_on_object_detection_area_entered"]
+[connection signal="area_exited" from="ObjectDetection" to="." method="_on_object_detection_area_exited"]
+[connection signal="body_entered" from="ObjectDetection" to="." method="_on_object_detection_body_entered"]
+[connection signal="body_exited" from="ObjectDetection" to="." method="_on_object_detection_body_exited"]
