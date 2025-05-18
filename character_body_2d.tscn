@@ -10,7 +10,7 @@ colors = PackedColorArray(0.187106, 0.465345, 0.766138, 1)
 gradient = SubResource("Gradient_ij6vw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44cfe"]
-size = Vector2(50, 72)
+size = Vector2(50, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f50pn"]
 size = Vector2(70, 20)
@@ -21,17 +21,20 @@ script = ExtResource("1_f50pn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 36)
-scale = Vector2(0.195312, 72)
+scale = Vector2(0.195312, 60)
 texture = SubResource("GradientTexture1D_ghijl")
 
 [node name="Body" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 36)
 shape = SubResource("RectangleShape2D_44cfe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(0, 11)
+visible = false
+position = Vector2(0, 22)
 scale = Vector2(4.94444, 5)
 node_a = NodePath("..")
 
