@@ -7,7 +7,6 @@ var areas_close = []
 var can_jump : bool = true
 
 func _physics_process(delta):
-	var grabbing = false
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
