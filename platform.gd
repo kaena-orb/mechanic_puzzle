@@ -3,24 +3,27 @@ class_name Platform
 
 @export var hiddable : bool
 @export var togglers : Array[Toggle]
+var togglers_pressed : int
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
 	if hiddable:
-		disable()
+		hide_platform()
 	for toggler in togglers:
 		toggler.toggle_pressed.connect(enable)
 		toggler.toggle_released.connect(disable)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
 func enable():
-	$CollisionShape2D.set_deferred("disabled", false)
-	$AnimationPlayer.play("show")
+	togglers_pressed += 1
+	if togglers_pressed == togglers.size():
+		$CollisionShape2D.set_deferred("disabled", false)
+		$AnimationPlayer.play("show")
 
 func disable():
-	$CollisionShape2D.set_deferred("disabled", true)
-	$AnimationPlayer.play("hide")
+	togglers_pressed -= 1
+	hide_platform()
+
+func hide_platform():
+	if not $CollisionShape2D.disabled:
+		$CollisionShape2D.set_deferred("disabled", true)
+		$AnimationPlayer.play("hide")

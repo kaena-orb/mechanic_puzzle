@@ -15,8 +15,8 @@ func toggle_on():
 func add_body(body):
 	if not bodies_in_place.size():
 		$AnimationPlayer.play("press")
+		toggle_pressed.emit()
 	bodies_in_place.append(body)
-	toggle_pressed.emit()
 
 func remove_body(body):
 	bodies_in_place.erase(body)
