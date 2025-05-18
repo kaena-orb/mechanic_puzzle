@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7o7vbooos22p"]
+
+[ext_resource type="Script" uid="uid://d2ms1h6rb5dd5" path="res://crate.gd" id="1_uep05"]
+
+[sub_resource type="Gradient" id="Gradient_4417n"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.698174, 0.497039, 0.312127, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uep05"]
+gradient = SubResource("Gradient_4417n")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo0jf"]
+size = Vector2(44, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4417n"]
+size = Vector2(58, 40)
+
+[node name="Crate" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 7
+can_sleep = false
+lock_rotation = true
+constant_force = Vector2(0, -9.8)
+script = ExtResource("1_uep05")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.171875, 40)
+texture = SubResource("GradientTexture1D_uep05")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mo0jf")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(-21, -10)
+scale = Vector2(0.839999, 0.600001)
+node_a = NodePath("..")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(21, -10)
+scale = Vector2(0.840194, 0.600001)
+node_a = NodePath("..")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 7)
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_4417n")
