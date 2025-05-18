@@ -30,6 +30,7 @@ position = Vector2(0, 36)
 shape = SubResource("RectangleShape2D_44cfe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -100)
 zoom = Vector2(2, 2)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]

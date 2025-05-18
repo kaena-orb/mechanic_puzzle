@@ -48,9 +48,11 @@ scale = Vector2(0.0636941, 0.431832)
 hiddable = true
 togglers = [NodePath("../../Togglers/Toggle"), NodePath("../../Togglers/Toggle2")]
 
-[node name="FixedPlatform6" parent="Platforms" instance=ExtResource("2_4ptq8")]
+[node name="FixedPlatform6" parent="Platforms" node_paths=PackedStringArray("togglers") instance=ExtResource("2_4ptq8")]
 position = Vector2(465, -317)
 scale = Vector2(0.0636941, 0.431832)
+hiddable = true
+togglers = [NodePath("../../Togglers/Toggle")]
 
 [node name="FixedPlatform2" parent="Platforms" instance=ExtResource("2_4ptq8")]
 position = Vector2(88, -151)
