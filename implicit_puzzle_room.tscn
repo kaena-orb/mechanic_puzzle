@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://kyabiw1ppjjh"]
+
+[ext_resource type="PackedScene" uid="uid://cjfgddsn4v5kp" path="res://character_body_2d.tscn" id="1_hep0h"]
+[ext_resource type="PackedScene" uid="uid://drgyytt34f618" path="res://toggle.tscn" id="2_sgy8l"]
+[ext_resource type="PackedScene" uid="uid://ds3e8h6g31g8d" path="res://platform.tscn" id="3_ma2s6"]
+[ext_resource type="PackedScene" uid="uid://c7o7vbooos22p" path="res://crate.tscn" id="4_h6yao"]
+[ext_resource type="PackedScene" uid="uid://bvgnv57glnvqh" path="res://spring-crate.tscn" id="5_0ag2i"]
+
+[node name="ImplicitPuzzleRoom" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_hep0h")]
+position = Vector2(135, -75)
+
+[node name="Togglers" type="Node2D" parent="."]
+
+[node name="Toggle" parent="Togglers" instance=ExtResource("2_sgy8l")]
+position = Vector2(208, -1)
+
+[node name="Toggle2" parent="Togglers" instance=ExtResource("2_sgy8l")]
+position = Vector2(509, -1)
+
+[node name="Floor" parent="." instance=ExtResource("3_ma2s6")]
+position = Vector2(-1, 0)
+
+[node name="MovingObjects" type="Node2D" parent="."]
+position = Vector2(327, -28)
+
+[node name="Crate" parent="MovingObjects" instance=ExtResource("4_h6yao")]
+
+[node name="Crate2" parent="MovingObjects" instance=ExtResource("4_h6yao")]
+position = Vector2(0, -41)
+
+[node name="Crate3" parent="MovingObjects" instance=ExtResource("5_0ag2i")]
+position = Vector2(382, 7)
+
+[node name="Crate4" parent="MovingObjects" instance=ExtResource("5_0ag2i")]
+position = Vector2(382, -55)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="FixedPlatform" parent="Platforms" instance=ExtResource("3_ma2s6")]
+position = Vector2(-20, -69)
+scale = Vector2(0.0636941, 0.431832)
+
+[node name="FixedPlatform5" parent="Platforms" node_paths=PackedStringArray("togglers") instance=ExtResource("3_ma2s6")]
+position = Vector2(285, -317)
+scale = Vector2(0.0636941, 0.431832)
+togglers = [NodePath("../../Togglers/Toggle"), NodePath("../../Togglers/Toggle2")]
+
+[node name="FixedPlatform6" parent="Platforms" node_paths=PackedStringArray("togglers") instance=ExtResource("3_ma2s6")]
+position = Vector2(465, -317)
+scale = Vector2(0.0636941, 0.431832)
+togglers = [NodePath("../../Togglers/Toggle")]
+
+[node name="FixedPlatform2" parent="Platforms" instance=ExtResource("3_ma2s6")]
+position = Vector2(88, -151)
+scale = Vector2(0.0636941, 0.431832)
+
+[node name="FixedPlatform3" parent="Platforms" instance=ExtResource("3_ma2s6")]
+position = Vector2(-28, -233)
+scale = Vector2(0.0636941, 0.431832)
+
+[node name="FixedPlatform4" parent="Platforms" instance=ExtResource("3_ma2s6")]
+position = Vector2(94, -314)
+scale = Vector2(0.0636941, 0.431832)
