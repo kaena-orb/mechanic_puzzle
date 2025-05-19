@@ -2,7 +2,7 @@ extends StaticBody2D
 class_name Platform
 
 @export var hide_on_success : bool
-@export var toggle_group : ToggleGroup
+@export var puzzle_group : PuzzleGroup
 @export var togglers : Array[Toggle]
 var togglers_pressed : int
 # Called when the node enters the scene tree for the first time.
@@ -17,12 +17,12 @@ func wire_signals():
 	for toggler in togglers:
 		toggler.toggle_pressed.connect(enable)
 		toggler.toggle_released.connect(disable)
-	if toggle_group:
-		toggle_group.toggle_group_solved.connect(enable)
+	if puzzle_group:
+		puzzle_group.toggle_group_solved.connect(enable)
 
 func enable(_emitter = null):
 	togglers_pressed += 1
-	if togglers_pressed == togglers.size() or not togglers.size() and toggle_group:
+	if togglers_pressed == togglers.size() or not togglers.size() and puzzle_group:
 		if hide_on_success:
 			hide_platform()
 		else:
